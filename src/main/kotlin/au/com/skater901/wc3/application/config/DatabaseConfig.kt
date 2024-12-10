@@ -7,6 +7,7 @@ internal class DatabaseConfig(
     val type: DatabaseType = DatabaseType.MySQL,
     val host: String = "localhost",
     val port: Int = 3306,
+    val name: String = "wc3_bot",
     val username: String,
     val password: String
 ) {

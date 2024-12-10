@@ -67,6 +67,7 @@ dependencies {
 
     // Notification Modules
     implementation(project(":discord-module"))
+    implementation(project(":masto-module"))
 
     testImplementation(kotlin("test"))
 

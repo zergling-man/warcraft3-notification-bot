@@ -23,12 +23,12 @@ internal class DatabaseModule : AbstractModule() {
         return HikariDataSource().apply {
             when (databaseConfig.type) {
                 DatabaseConfig.DatabaseType.MySQL -> {
-                    jdbcUrl = "jdbc:mysql://${databaseConfig.host}:${databaseConfig.port}/wc3_bot"
+                    jdbcUrl = "jdbc:mysql://${databaseConfig.host}:${databaseConfig.port}/${databaseConfig.name}"
                     driverClassName = com.mysql.cj.jdbc.Driver::class.qualifiedName
                 }
 
                 DatabaseConfig.DatabaseType.MariaDB -> {
-                    jdbcUrl = "jdbc:mariadb://${databaseConfig.host}:${databaseConfig.port}/wc3_bot"
+                    jdbcUrl = "jdbc:mariadb://${databaseConfig.host}:${databaseConfig.port}/${databaseConfig.name}"
                     driverClassName = org.mariadb.jdbc.Driver::class.qualifiedName
                 }
             }
