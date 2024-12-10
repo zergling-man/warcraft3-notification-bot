@@ -42,7 +42,7 @@ abstract class SQLDBExtension<out CONTAINER : JdbcDatabaseContainer<out CONTAINE
     override fun beforeAll(context: ExtensionContext) {
         val configuration: Configuration? = context.requiredTestClass.getAnnotation(Configuration::class.java)
 
-        container = containerProvider().withDatabaseName("wc3_bot")
+        container = containerProvider().withDatabaseName("${databaseConfig.name}")
             .configure(configuration)
             .apply { start() }
 
@@ -82,7 +82,7 @@ abstract class SQLDBExtension<out CONTAINER : JdbcDatabaseContainer<out CONTAINE
 
     override fun afterEach(context: ExtensionContext) {
         jdbi.usingHandle { handle ->
-            handle.createQuery("SHOW tables FROM wc3_bot")
+            handle.createQuery("SHOW tables FROM ${databaseConfig.name}")
                 .mapTo(String::class.java)
                 .list()
                 .filter { !it.startsWith("DATABASECHANGELOG") }

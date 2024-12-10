@@ -67,7 +67,7 @@ internal class DatabaseModuleITCase {
             assertThat(jdbi === injector.getInstance<Jdbi>()).isTrue()
 
             val tables = jdbi.wHandle {
-                it.createQuery("SHOW TABLES FROM wc3_bot;")
+                it.createQuery("SHOW TABLES FROM ${databaseConfig.name};")
                     .mapTo(String::class.java)
                     .list()
             }
