@@ -1,6 +1,7 @@
 package au.rakka.java.mastoapi
 
 import au.com.skater901.wc3.api.core.service.GameNotifier
+
 import java.net.http.HttpClient // This should be significantly less hassle.
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
@@ -11,6 +12,7 @@ import java.util.concurrent.ConcurrentMap
 import au.com.skater901.wc3.api.core.domain.Game
 import au.com.skater901.wc3.api.core.domain.GameSource
 import au.com.skater901.wc3.api.core.domain.Region
+
 // Used to get my config class in here
 import jakarta.inject.Inject
 
@@ -28,11 +30,12 @@ public class MastoNotifier @Inject constructor(private val conf:MastoConfig) : G
 	private val logger = LoggerFactory.getLogger(MastoNotifier::class.java)
 	private val mapper = ObjectMapper()
 	
+	private val userAgent = "WC3 Notification Bot ${System.getProperty("appVersion")} - Java-http-client/${System.getProperty("java.version")}"
 	private val client: HttpClient = HttpClient.newHttpClient()
-	private val builder: HttpRequest.Builder = HttpRequest.newBuilder().setHeader("Authorization","Bearer ${conf.token}").setHeader("Content-Type","application/json")
+	private val builder: HttpRequest.Builder = HttpRequest.newBuilder().setHeader("Authorization","Bearer ${conf.token}").setHeader("Content-Type","application/json").setHeader("User-Agent",userAgent)
+	
 	private val baseurl = "https://${conf.instance}/api/v1/" // Might want this for other endpoints later maybe
 	private val statusurl = "${baseurl}statuses"
-	private val userAgent = "WC3 Notification Bot ${System.getProperty("appVersion")} - Java-http-client/${System.getProperty("java.version")}"
 	
 	override suspend fun notifyNewGame(notificationId: String, game: Game)
 	{
@@ -66,7 +69,7 @@ public class MastoNotifier @Inject constructor(private val conf:MastoConfig) : G
 	private fun game_to_string(game:Game, tag:String?, gameRemoved:Boolean=false): HttpRequest.BodyPublisher
 	{
 		val body="{\"status\":\"" +
-		"#${tag} lobby's " + if (!gameRemoved) {"up"} else {"down"} +
+		"${tag} lobby's " + if (!gameRemoved) {"up"} else {"down"} +
 		"\\nName: "+game.name +
 		"\\nMap: "+game.map +
 		"\\nHosted by: "+game.host +
