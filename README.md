@@ -12,7 +12,7 @@ different systems. Currently supported systems are:
 
 To run this application, you'll need to do the following steps:
 
-1. Create an SQL database, with a `wc3_bot` schema.
+1. Create an SQL database, with a `wc3_bot` schema (or set database.name in config.properties to whatever schema you will use).
 2. Create a user with full access to the `wc3_bot` schema.
 3. Create a Java properties file with configuration values. Configuration will be discussed below.
 4. Run the application using the following command: `./gradlew run -PconfigFile=path/to/properties/file.properties`

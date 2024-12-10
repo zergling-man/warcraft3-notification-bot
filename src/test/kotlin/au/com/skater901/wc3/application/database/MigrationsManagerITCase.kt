@@ -33,7 +33,7 @@ class MigrationsManagerITCase {
 
         testMigration(
             HikariDataSource().apply {
-                jdbcUrl = "jdbc:mariadb://localhost:${mariaDB.port}/${databaseConfig.name}"
+                jdbcUrl = "jdbc:mariadb://localhost:${mariaDB.port}/wc3_bot"
                 driverClassName = org.mariadb.jdbc.Driver::class.qualifiedName
                 username = mariaDB.username
                 password = mariaDB.password
@@ -42,7 +42,7 @@ class MigrationsManagerITCase {
         )
         testMigration(
             HikariDataSource().apply {
-                jdbcUrl = "jdbc:mysql://localhost:${mySQL.port}/${databaseConfig.name}"
+                jdbcUrl = "jdbc:mysql://localhost:${mySQL.port}/wc3_bot"
                 driverClassName = com.mysql.cj.jdbc.Driver::class.qualifiedName
                 username = mySQL.username
                 password = mySQL.password
