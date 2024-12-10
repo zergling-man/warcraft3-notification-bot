@@ -38,7 +38,7 @@ internal class ModuleManager @Inject constructor(
             )
 
             if (it.scheduledTask() != null || it.scheduledTaskClass != null) {
-                taskRunner.runTask(it, injector)
+                taskRunner.runTask(it, childInjector)
             }
 
             gameNotifiers[it.moduleName] = (it.gameNotifierClass
