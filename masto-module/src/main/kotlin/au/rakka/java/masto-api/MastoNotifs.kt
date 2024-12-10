@@ -17,7 +17,7 @@ public class MastoNotificationModule : NotificationModule<MastoConfig, MastoNoti
 	private val logger = LoggerFactory.getLogger(MastoNotificationModule::class.java)
 	override public fun initializeNotificationHandlers(config:MastoConfig, injector:Injector, wc3GameNotificationService:WC3GameNotificationService)
 	{
-		logger.debug("Blep")
+		logger.debug("xyzzy")
 	}
 	override val gameNotifierClass: KClass<MastoNotifier> = MastoNotifier::class
 	override val scheduledTaskClass: KClass<MastoReplyGuy> = MastoReplyGuy::class
