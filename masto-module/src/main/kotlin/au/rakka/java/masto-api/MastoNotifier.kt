@@ -41,11 +41,10 @@ public class MastoNotifier @Inject constructor(private val conf:MastoConfig) : G
 	{
 		logger.debug("Notifying new game")
 		hostedGameTags[game.id]=notificationId
-		val response = client.sendAsync(builder.uri(URI.create(statusurl)).POST(game_to_string(game,hostedGameTags[game.id])).build(),HttpResponse.BodyHandlers.ofInputStream()).await()
+		val response = client.sendAsync(builder.uri(URI.create(statusurl)).POST(game_to_string(game,hostedGameTags[game.id])).build(),HttpResponse.BodyHandlers.ofString()).await()
 		logger.debug(response.statusCode().toString())
 		val node=mapper.readTree(response.body())
-		// Can't read it twice and can't be fucked figuring out how to stash it
-		//logger.debug(response.body().use { r -> r.use { r.reader().use { i -> i.readText() } } })
+		logger.debug(response.body())
 		hostedGameMessages[game.id]=node.get("id").asText()
 		logger.debug("Saved ID {}: {}",game.id,hostedGameMessages[game.id])
 	}
