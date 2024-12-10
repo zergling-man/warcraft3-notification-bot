@@ -59,7 +59,8 @@ public class MastoNotifier @Inject constructor(private val conf:MastoConfig) : G
 	
 	override suspend fun closeExpiredGame(game: Game)
 	{
-		val response=client.sendAsync(builder.uri(URI.create(statusurl+"/"+hostedGameMessages[game.id])).PUT(game_to_string(game,hostedGameTags[game.id],true)).build(),HttpResponse.BodyHandlers.ofInputStream()).await()
+		val response=client.sendAsync(builder.uri(URI.create(statusurl+"/"+hostedGameMessages[game.id])).PUT(game_to_string(game,hostedGameTags[game.id],true)).build(),HttpResponse.BodyHandlers.ofString()).await()
+		logger.debug("{} {}",response.statusCode(),response.Body())
 		hostedGameMessages.remove(game.id)
 		hostedGameTags.remove(game.id)
 	}
