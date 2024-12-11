@@ -32,6 +32,8 @@ public class MastoReplyGuy @Inject constructor(private val conf:MastoConfig, pri
 	private val clearurl = "${baseurl}notifications/clear"
 	private val statusurl = "${baseurl}statuses"
 	
+	private var is_pleroma:Boolean? = null
+	
 	override val schedule: Int = 30
 	override suspend fun task()
 	{
@@ -55,7 +57,15 @@ public class MastoReplyGuy @Inject constructor(private val conf:MastoConfig, pri
 	{
 		logger.debug("Processing notif {}",post.get("id"))
 		if (post.get("type").asText()!="mention") {logger.debug("Was not a mention");return}
-		val text= post.get("status").get("pleroma").get("content").get("text/plain").asText()
+		if (is_pleroma==null)
+			{is_pleroma=post.get("status").get("pleroma")!=null}
+		val text:String
+		//if (is_pleroma!!)
+		//	{text=post.get("status").get("pleroma").get("content").get("text/plain").asText()}
+		//else
+		//{
+			text=post.get("status").get("content").asText().replace(Regex("<.*?>"),"")
+		//}
 		val (tag,regex)=process_post_contents(text)
 		if (tag=="") {logger.debug("tag: {} was null",tag);return}
 		if (regex=="")
