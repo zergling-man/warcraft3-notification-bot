@@ -27,10 +27,10 @@ internal class RegisterNotification @Inject constructor(
             required = true
         )
 
-        option<Role>(
-            "notified-role",
-            "A Discord role that you want to be notified every time a new game is hosted."
-        )
+//        option<Role>(
+//            "notified-role",
+//            "A Discord role that you want to be notified every time a new game is hosted."
+//        )
     }
 
     override val defaultPermissions: DefaultMemberPermissions = DefaultMemberPermissions.DISABLED

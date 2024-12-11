@@ -45,8 +45,8 @@ internal class DatabaseModuleITCase {
                 type,
                 "localhost",
                 port,
-                "wc3_notification_bot",
-                "mypassword"
+                username = "wc3_notification_bot",
+                password = "mypassword"
             )
 
             val injector = Guice.createInjector(

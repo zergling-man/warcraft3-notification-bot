@@ -367,8 +367,8 @@ class ModuleManagerTest {
         moduleManager.initializeModules(injector)
 
         verify(taskRunner) {
-            1 * { runTask(moduleWithScheduledTaskInstance, injector) }
-            1 * { runTask(moduleWithScheduledTaskClass, injector) }
+            1 * { runTask(moduleWithScheduledTaskInstance, childInjector) }
+            1 * { runTask(moduleWithScheduledTaskClass, childInjector) }
         }
     }
 
