@@ -55,3 +55,7 @@ This will produce both a `refresh_token` and an `access_token`, the latter is wh
 
 This bot takes advantage of pleroma's plaintext post contents property to more accurately read posts directed at it.
 On mastodon, it will fall back to processing the post contents by first deleting all HTML tags. This might cause unexpected behaviour.
+
+WARNING: This has NOT ACTUALLY BEEN TESTED ON MASTODON. It was developed and tested on pleroma.
+There is a particular issue with pleroma that backslashes in the regexes have to be doubled before being posted back out (but after being saved to the DB), this may not be necessary on mastodon, and thus it may produce an incorrect response (but still behave correctly).
+There may be other mastodon-specific bugs that I have not encountered, please reach out to @Zergling_man@sacred.harpy.faith if you wish to report any.
