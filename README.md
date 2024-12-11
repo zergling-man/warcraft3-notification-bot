@@ -7,6 +7,7 @@ This application supports modules which can be developed for different systems t
 different systems. Currently supported systems are:
 
 - [Discord](discord-module)
+- [Mastodon](masto-module)
 
 ## Running this application
 
